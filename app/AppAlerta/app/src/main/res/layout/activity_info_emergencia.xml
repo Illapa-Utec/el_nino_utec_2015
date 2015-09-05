@@ -1,0 +1,66 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.illapa.appalerta.InfoEmergenciaActivity">
+
+    <TextView android:text="Información de Emergencia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:id="@+id/header"
+        />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:padding="10dp"
+        android:orientation="vertical"
+        android:layout_centerInParent="true"
+        android:id="@+id/linearLayout">
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_around"
+            android:text="LLAMAR a la Policia"
+            android:padding="20dp"
+            android:layout_marginBottom="20dp"
+            android:id="@+id/btnPolicia"/>
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_around"
+            android:padding="20dp"
+            android:text="LLAMAR a Bomberos"
+            android:layout_marginBottom="20dp"
+            android:id="@+id/btnBomberos"/>
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_around"
+            android:padding="20dp"
+            android:text="LLAMAR a Defensa Civil"
+            android:layout_marginBottom="20dp"
+            android:id="@+id/btnDCivil"/>
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_around"
+            android:padding="20dp"
+            android:text="LLAMAR a Cruz Roja"
+            android:layout_marginBottom="20dp"
+            android:id="@+id/btnCRoja"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

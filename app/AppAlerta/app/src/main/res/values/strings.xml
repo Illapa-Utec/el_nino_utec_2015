@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">AppAlerta</string>
+
+    <string name="hello_world">Illapa Utec</string>
+    <string name="action_settings">Illapa Utec</string>
+    <string name="title_activity_info_emergencia">Illapa Utec</string>
+    <string name="title_activity_eventos_map">Illapa Utec</string>
+    <string name="title_activity_splash">Illapa Utec</string>
+    <string name="title_activity_selection">Illapa Utec</string>
+</resources>
