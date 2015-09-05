@@ -7,4 +7,5 @@
     <string name="title_activity_eventos_map">Illapa Utec</string>
     <string name="title_activity_splash">Illapa Utec</string>
     <string name="title_activity_selection">Illapa Utec</string>
+    <string name="title_activity_notification_event">NotificationEventActivity</string>
 </resources>

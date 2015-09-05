@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.location.Location;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,18 +16,27 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.illapa.appalerta.model.entity.EventEntity;
+import com.illapa.appalerta.model.entity.EventsResponse;
+import com.illapa.appalerta.request.ApiClient;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 public class SelectionActivity extends AppCompatActivity {
 
     private static final int ZOOM =10;
+    private static final String TAG ="SelectionA" ;
     @Bind(R.id.btnInformar)
     View btnInformar;
+
+    @Bind(R.id.rlayLoading)
+    View rlayLoading;
 
     private GoogleMap map;
     //Lima PERU
@@ -47,10 +57,28 @@ public class SelectionActivity extends AppCompatActivity {
     private void init() {
         buildMap();
         populateMarkers();
+        loadEvents();
         btnInformar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 gotoInformar();
+            }
+        });
+    }
+
+    private void loadEvents() {
+        showLoading(true);
+        ApiClient.getILlapaApiClient().events(new Callback<EventsResponse>() {
+            @Override
+            public void success(EventsResponse eventsResponse, Response response) {
+                showLoading(false);
+                Log.v(TAG, "success " + eventsResponse.toString() + " | response " + response.toString());
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Log.v(TAG, "failure "+error);
+                showLoading(false);
             }
         });
     }
@@ -60,7 +88,7 @@ public class SelectionActivity extends AppCompatActivity {
         lsEventEntities.add(new EventEntity("100",0,-12.162590, -77.014980,"LLUVIA O INUNDACION : Rio Chillon"));
         lsEventEntities.add(new EventEntity("101",1,-12.224586, -76.924299,"EPIDEMIA : Denge"));
         lsEventEntities.add(new EventEntity("102",3,-12.102660, -76.995121,"CARRETERA: Cierre de Panamericana"));
-        lsEventEntities.add(new EventEntity("103",4,-14.287596, -75.559027,"ALIMENTO: Escasez de alimento"));
+        lsEventEntities.add(new EventEntity("103", 4, -14.287596, -75.559027, "ALIMENTO: Escasez de alimento"));
 
         for (EventEntity eventEntity:lsEventEntities) {
             drawMarker(new LatLng(eventEntity.getLat(),eventEntity.getLng()),eventEntity.getObs()
@@ -112,6 +140,12 @@ public class SelectionActivity extends AppCompatActivity {
     {
         Intent intent= new Intent(SelectionActivity.this, MainActivity.class);
         startActivity(intent);
+    }
+
+    private void showLoading(boolean state)
+    {
+        int visibility= (state)?(View.VISIBLE):(View.GONE);
+        rlayLoading.setVisibility(visibility);
     }
 
     @Override

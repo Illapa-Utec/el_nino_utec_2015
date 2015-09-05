@@ -15,10 +15,8 @@ import android.widget.TextView;
 
 import com.illapa.appalerta.R;
 import com.illapa.appalerta.helpers.DeviceHelper;
-import com.illapa.appalerta.model.entity.EventResponse;
+import com.illapa.appalerta.model.entity.ReportResponse;
 import com.illapa.appalerta.request.ApiClient;
-
-import java.util.Objects;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -118,10 +116,10 @@ public class InformarEventoDialog extends DialogFragment {
         String deviceID= DeviceHelper.deviceID(getActivity());
         //eventId
 
-        ApiClient.getILlapaApiClient().registerEvent(lat, lng, deviceID, eventId, observacion, new Callback<EventResponse>()
+        ApiClient.getILlapaApiClient().registerEvent(lat, lng, deviceID, eventId, observacion, new Callback<ReportResponse>()
         {
             @Override
-            public void success(EventResponse eventResponse, Response response) {
+            public void success(ReportResponse eventResponse, Response response) {
                 Log.v(TAG, "success " + eventResponse.toString() + " | response " + response.toString());
                 //UserEntity userEntity= Translate.toUser(success);
                 //PreferencesHelper.saveSesionUser(loginView.getContext(),userEntity);

@@ -3,7 +3,7 @@ package com.illapa.appalerta.model.entity;
 /**
  * Created by emedinaa on 05/09/15.
  */
-public class EventResponse extends BaseResponse {
+public class ReportResponse extends BaseResponse {
 
     private Object data;
 
@@ -17,7 +17,7 @@ public class EventResponse extends BaseResponse {
 
     @Override
     public String toString() {
-        return "EventResponse{" +
+        return "ReportResponse{" +
                 "status="+this.getStatus()+" "+
                 "data=" + data +
                 '}';
