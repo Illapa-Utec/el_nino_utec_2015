@@ -43,6 +43,8 @@ public class SelectionActivity extends AppCompatActivity {
     private double userLat=-12.0478158;
     private double userLng=-77.0622028;
     private List<EventEntity> lsEventEntities;
+
+
     private int[] arrMarkers={R.drawable.ic_marker,R.drawable.ic_marker2,
     R.drawable.ic_marker3,R.drawable.ic_marker4};
 
@@ -56,7 +58,7 @@ public class SelectionActivity extends AppCompatActivity {
 
     private void init() {
         buildMap();
-        populateMarkers();
+        //populateMarkers();
         loadEvents();
         btnInformar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,11 +75,19 @@ public class SelectionActivity extends AppCompatActivity {
             public void success(EventsResponse eventsResponse, Response response) {
                 showLoading(false);
                 Log.v(TAG, "success " + eventsResponse.toString() + " | response " + response.toString());
+                if(eventsResponse!=null)
+                {
+                    lsEventEntities= eventsResponse.getData();
+                    for (EventEntity eventEntity:lsEventEntities) {
+                        drawMarker(new LatLng(eventEntity.getLat(),eventEntity.getLng()),eventEntity.getObs()
+                                ,eventEntity.getCategory());
+                    }
+                }
             }
 
             @Override
             public void failure(RetrofitError error) {
-                Log.v(TAG, "failure "+error);
+                Log.v(TAG, "failure " + error);
                 showLoading(false);
             }
         });

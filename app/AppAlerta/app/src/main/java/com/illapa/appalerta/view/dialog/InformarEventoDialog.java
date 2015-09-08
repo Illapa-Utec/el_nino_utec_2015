@@ -17,6 +17,7 @@ import com.illapa.appalerta.R;
 import com.illapa.appalerta.helpers.DeviceHelper;
 import com.illapa.appalerta.model.entity.ReportResponse;
 import com.illapa.appalerta.request.ApiClient;
+import com.illapa.appalerta.utils.MathUtils;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -34,6 +35,11 @@ public class InformarEventoDialog extends DialogFragment {
     private String observacion;
     private int eventId;
     private View rlayLoading;
+
+    private double[] latitudes ={-5.379933,-6.996381,-9.193367,-10.665085,-13.458168,-12.0478158,-3.749683,-4.603400,-5.224580,-6.546887,
+            -6.686837,-7.262075};
+    private double[] longitudes ={ -80.101877,-79.135080,-78.322092, -77.531076, -75.992990,-77.0622028, -80.472767, -81.017540, -81.028526,
+            -79.932640,-79.484692, -78.432751};
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -109,10 +115,12 @@ public class InformarEventoDialog extends DialogFragment {
         rlayLoading.setVisibility(visibility);
     }
 
-    private void sendEvent() {
-        showLoading(true);
-        double lat=-12.0478158;
-        double lng=-77.0622028;
+    private void sendEvent()
+    {
+        int size= latitudes.length-1;
+        int rnd= MathUtils.randomByRange(0,size);
+        double lat=latitudes[rnd];
+        double lng=longitudes[rnd];
         String deviceID= DeviceHelper.deviceID(getActivity());
         //eventId
 
